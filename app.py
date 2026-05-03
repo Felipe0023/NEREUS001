@@ -15,7 +15,7 @@ from xgboost import XGBRegressor, XGBClassifier
 
 
 logo = Image.open("LOGO_NEREUS.png")
-st.set_page_config(page_title="Tereos App", page_icon=logo)
+st.set_page_config(page_title="NEREUS App", page_icon=logo)
 
 # 2. Crear tres columnas
 # La proporción [1, 1, 1] crea tres espacios iguales. 
