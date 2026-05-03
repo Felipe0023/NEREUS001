@@ -2,8 +2,10 @@ streamlit
 pandas
 numpy
 joblib
-plotly.graph_objects
-plotly.express
-matplotlib.pyplot
+plotly
+matplotlib
 seaborn
 rasterio
+Pillow
+scikit-learn
+xgboost
