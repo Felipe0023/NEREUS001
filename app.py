@@ -22,7 +22,7 @@ logo = Image.open("LOGO_NEREUS.png")
 col1, col2, col3 = st.columns([1, 1, 1])
 
 with col2:
-    st.image(logo, width=200)
+    st.image(logo, width=300)
 
 
 
