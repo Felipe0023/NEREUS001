@@ -19,7 +19,7 @@ logo = Image.open("LOGO_NEREUS.png")
 # 2. Crear tres columnas
 # La proporción [1, 1, 1] crea tres espacios iguales. 
 # Pondremos el logo en la columna del medio.
-col1, col2, col3 = st.columns([1, 1, 1])
+col1, col2, col3 = st.columns([1, 2, 1])
 
 with col2:
     st.image(logo, width=300)
