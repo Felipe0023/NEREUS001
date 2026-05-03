@@ -14,23 +14,18 @@ from sklearn.cluster import DBSCAN
 from xgboost import XGBRegressor, XGBClassifier
 
 
+#***************************************************************************
 logo = Image.open("LOGO_NEREUS.png")
 st.set_page_config(page_title="NEREUS App", page_icon=logo)
-
 # 2. Crear tres columnas
 # La proporción [1, 1, 1] crea tres espacios iguales. 
 # Pondremos el logo en la columna del medio.
 col1, col2, col3 = st.columns([1, 2, 1])
-
 with col2:
     st.image(logo, width=300)
+#***************************************************************************
 
 
-
-
-
-# Configuración de página
-#st.set_page_config(page_title="Geología & Hidrogeología AI", layout="wide")
 
 # --- FUNCIONES DE APOYO ---
 def load_data(file):
