@@ -15,34 +15,9 @@ from xgboost import XGBRegressor, XGBClassifier
 
 
 import streamlit as st
-import requests
-from io import BytesIO
 from PIL import Image
-
-# Usamos cache para que solo descargue la imagen UNA VEZ
-@st.cache_data
-def obtener_imagen_logo(url):
-    try:
-        response = requests.get(url)
-        return Image.open(BytesIO(response.content))
-    except:
-        return None
-
-# URL de tu imagen
-URL_DRIVE = "https://drive.google.com/uc?export=view&id=1jcdYjLgdkbgomF81QpfbGQYDwePbgIkj"
-
-# Lógica principal
-logo = obtener_imagen_logo(URL_DRIVE)
-
-if logo:
-    st.image(logo, width=200) # Puedes ajustar el tamaño aquí
-    
-st.warning("👈 Por favor, sube los archivos CSV y TIF en la barra lateral para comenzar.")
-
-
-
-
-
+logo = Image.open("LOGO_NEREUS.png")
+st.image(logo, width=200)
 
 # Configuración de página
 st.set_page_config(page_title="Geología & Hidrogeología AI", layout="wide")
