@@ -14,10 +14,19 @@ from sklearn.cluster import DBSCAN
 from xgboost import XGBRegressor, XGBClassifier
 
 
-import streamlit as st
-from PIL import Image
-logo = Image.open("LOGO_NEREUS.png")
-st.image(logo, width=200)
+logo = Image.open("logo.png")
+
+# 2. Crear tres columnas
+# La proporción [1, 1, 1] crea tres espacios iguales. 
+# Pondremos el logo en la columna del medio.
+col1, col2, col3 = st.columns([1, 1, 1])
+
+with col2:
+    st.image(logo, width=200)
+
+
+
+
 
 # Configuración de página
 st.set_page_config(page_title="Geología & Hidrogeología AI", layout="wide")
