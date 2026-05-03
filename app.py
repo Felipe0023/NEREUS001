@@ -30,7 +30,7 @@ with col2:
 
 
 # Configuración de página
-st.set_page_config(page_title="Geología & Hidrogeología AI", layout="wide")
+#st.set_page_config(page_title="Geología & Hidrogeología AI", layout="wide")
 
 # --- FUNCIONES DE APOYO ---
 def load_data(file):
