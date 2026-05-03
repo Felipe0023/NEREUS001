@@ -14,7 +14,7 @@ from sklearn.cluster import DBSCAN
 from xgboost import XGBRegressor, XGBClassifier
 
 
-logo = Image.open("logo.png")
+logo = Image.open("LOGO_NEREUS.png")
 
 # 2. Crear tres columnas
 # La proporción [1, 1, 1] crea tres espacios iguales. 
