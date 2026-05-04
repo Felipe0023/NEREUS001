@@ -78,7 +78,7 @@ if uploaded_csv and uploaded_tif:
         fig_map = go.Figure()
         fig_map.add_trace(go.Heatmap(x=x_coords, y=y_coords, z=np.flipud(data_dem), colorscale='earth'))
         fig_map.add_trace(go.Scatter(x=df_raw['Longitud'], y=df_raw['Latitud'], mode='markers', marker=dict(color='red')))
-        fig_map.update_layout(width=800, height=600, title="Ubicación de Perforaciones")
+        fig_map.update_layout(width=800, height=600)
         st.plotly_chart(fig_map, use_container_width=True)
 
 
