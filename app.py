@@ -29,42 +29,7 @@ with col2:
 
 # --- FUNCIONES DE APOYO ---
 
-# Inyectar CSS para poner la sidebar negra con letras blancas
-st.markdown(
-    """
-    <style>
-    /* 1. Fondo de la barra lateral */
-    [data-testid="stSidebar"] {
-        background-color: #000000;
-    }
 
-    /* 2. Color de todos los textos, headers y etiquetas en la sidebar */
-    [data-testid="stSidebar"] .stText, 
-    [data-testid="stSidebar"] label, 
-    [data-testid="stSidebar"] h1, 
-    [data-testid="stSidebar"] h2, 
-    [data-testid="stSidebar"] h3, 
-    [data-testid="stSidebar"] p {
-        color: white !important;
-    }
-
-    /* 3. Color de los números de los sliders y textos pequeños */
-    [data-testid="stSidebar"] .stMarkdown {
-        color: white;
-    }
-
-    /* 4. Ajuste opcional: color de los widgets (opcional) */
-    [data-testid="stSidebar"] .stNumberInput div div input {
-        color: black; /* El texto dentro del cuadro de número mejor dejarlo oscuro */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# --- AQUI CONTINUA TU CODIGO DE LA SIDEBAR ---
-st.sidebar.header("1. Carga de Datos")
-# ... resto de tus botones de upload y sliders
 
 
 def load_data(file):
