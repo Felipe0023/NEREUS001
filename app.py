@@ -81,33 +81,58 @@ if uploaded_csv and uploaded_tif:
         st.plotly_chart(fig_map, use_container_width=True)
 
 
+
+
+
         st.subheader("Análisis de Datos de Campo")
-        st.write("") # Pequeño espacio
+
         with st.container(border=True):
-            # Lógica de color y mapa
+            # 1. Función de color
             def color_por_k(k_val):
-                intensidad = min(255, int(k_val * 25))
+                if pd.isna(k_val): return [200, 200, 200, 160]
+                intensidad = min(255, int(abs(k_val) * 25))
                 return [intensidad, 100, 255 - intensidad, 160]
+
+            # 2. Detección de columnas
+            pk = ['log10_K', 'K', 'k', 'Conductividad']
+            col_k_real = next((n for n in pk if n in df_raw.columns), None)
+            
+            pn = ['Nombre', 'ID', 'Pozo', 'Well', 'Punto']
+            col_id = next((n for n in pn if n in df_raw.columns), None)
+
+            if col_k_real:
+                # Crear datos para el mapa
+                df_mapa = df_raw.copy()
+                df_mapa['color'] = df_mapa[col_k_real].apply(color_por_k)
                 
-            col_k = 'log10_K' if 'log10_K' in df_raw.columns else 'K'
-            df_raw['color'] = df_raw['K'].apply(color_por_k)
+                # Definir Tooltip de forma segura
+                t_html = f"<b>K:</b> {{{col_k_real}}}"
+                if col_id:
+                    t_html = f"<b>ID:</b> {{{col_id}}}<br/>" + t_html
 
-            st.pydeck_chart(pdk.Deck(
-                map_style='mapbox://styles/mapbox/outdoors-v12',
-                #api_keys={"mapbox": st.secrets.get("MAPBOX_TOKEN", "")},
-                initial_view_state=pdk.ViewState(
-                    latitude=df_raw["Latitud"].mean() if not df_raw.empty else 0,
-                    longitude=df_raw["Longitud"].mean() if not df_raw.empty else 0,
-                    zoom=13, pitch=45
-                ),
-                layers=[pdk.Layer("ScatterplotLayer", df_raw, get_position=["Longitud", "Latitud"],
-                              get_fill_color="color", get_radius=80, pickable=True)],
-                #tooltip={"html": f"<b>ID:</b> {{{col_nombre}}}<br/><b>K:</b> {{k}}"}
-                tooltip={"html": tooltip_html}
-            ))
-
-
-
+                # 3. Renderizar Mapa
+                st.pydeck_chart(pdk.Deck(
+                    map_style='mapbox://styles/mapbox/outdoors-v12',
+                    initial_view_state=pdk.ViewState(
+                        latitude=df_mapa["Latitud"].mean() if "Latitud" in df_mapa.columns else 0,
+                        longitude=df_mapa["Longitud"].mean() if "Longitud" in df_mapa.columns else 0,
+                        zoom=12, 
+                        pitch=45
+                    ),
+                    layers=[
+                        pdk.Layer(
+                            "ScatterplotLayer",
+                            df_mapa,
+                            get_position=["Longitud", "Latitud"],
+                            get_fill_color="color",
+                            get_radius=100,
+                            pickable=True
+                        )
+                    ],
+                    tooltip={"html": t_html}
+                ))
+            else:
+                st.error("No se encontró la columna de conductividad (K) en el CSV.")
 
 
 
