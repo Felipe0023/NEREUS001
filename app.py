@@ -13,7 +13,8 @@ from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.cluster import DBSCAN
 from xgboost import XGBRegressor, XGBClassifier
 import requests
-
+import pydeck as pdk
+import requests
 
 #***************************************************************************
 logo = Image.open("LOGO_NEREUS.png")
@@ -81,25 +82,25 @@ if uploaded_csv and uploaded_tif:
 
 
         st.subheader("Análisis de Datos de Campo")
-
         st.write("") # Pequeño espacio
         with st.container(border=True):
             # Lógica de color y mapa
             def color_por_k(k_val):
                 intensidad = min(255, int(k_val * 25))
                 return [intensidad, 100, 255 - intensidad, 160]
-
-            df['color'] = df['k'].apply(color_por_k)
+                
+            col_k = 'log10_K' if 'log10_K' in df_raw.columns else 'K'
+            df['color'] = df_raw['k'].apply(color_por_k)
 
             st.pydeck_chart(pdk.Deck(
                 map_style='mapbox://styles/mapbox/outdoors-v12',
                 #api_keys={"mapbox": st.secrets.get("MAPBOX_TOKEN", "")},
                 initial_view_state=pdk.ViewState(
-                    latitude=df["latitud"].mean() if not df.empty else 0,
-                    longitude=df["longitud"].mean() if not df.empty else 0,
+                    latitude=df_raw["Latitud"].mean() if not df_raw.empty else 0,
+                    longitude=df_raw["Longitud"].mean() if not df_raw.empty else 0,
                     zoom=13, pitch=45
                 ),
-                layers=[pdk.Layer("ScatterplotLayer", df, get_position=["longitud", "latitud"],
+                layers=[pdk.Layer("ScatterplotLayer", df_raw, get_position=["Longitud", "Latitud"],
                               get_fill_color="color", get_radius=80, pickable=True)],
                 tooltip={"html": f"<b>ID:</b> {{{col_nombre}}}<br/><b>K:</b> {{k}}"}
             ))
