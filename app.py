@@ -28,6 +28,36 @@ with col2:
 
 
 # --- FUNCIONES DE APOYO ---
+
+# Inyectar CSS personalizado para el fondo del header en la sidebar
+st.markdown(
+    """
+    <style>
+    /* Selecciona el contenedor del header dentro de la sidebar */
+    [data-testid="stSidebar"] .st-emotion-cache-10trblm {
+        background-color: #f0f2f6; /* Cambia este color (ej. #2E7D32 para verde) */
+        padding: 10px;
+        border-radius: 5px;
+    }
+    
+    /* Alternativa más segura: cambiar el fondo de todo el bloque de texto */
+    .sidebar-header-custom {
+        background-color: #ff4b4b; /* Color de fondo (Rojo Streamlit) */
+        color: white;              /* Color del texto */
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Ahora, en lugar de st.sidebar.header, usamos esto para que aplique el estilo:
+st.sidebar.markdown('<p class="sidebar-header-custom">1. Carga de Datos</p>', unsafe_allow_html=True)
+
+
 def load_data(file):
     return pd.read_csv(file)
 
