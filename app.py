@@ -62,7 +62,7 @@ if uploaded_csv and uploaded_tif:
     # --- TAB 1: EDA ---
     with tabs[0]:
 
-        st.subheader("Mapa de Localización de Perforaciones")
+        st.subheader("Mapa de Localización")
         # Guardar temporalmente el TIF para rasterio
         with open("temp_dem.tif", "wb") as f:
             f.write(uploaded_tif.getbuffer())
@@ -78,7 +78,7 @@ if uploaded_csv and uploaded_tif:
         fig_map = go.Figure()
         fig_map.add_trace(go.Heatmap(x=x_coords, y=y_coords, z=np.flipud(data_dem), colorscale='earth'))
         fig_map.add_trace(go.Scatter(x=df_raw['Longitud'], y=df_raw['Latitud'], mode='markers', marker=dict(color='red')))
-        fig_map.update_layout(width=800, height=600)
+        fig_map.update_layout(width=800, height=600, title="Ubicación de Perforaciones")
         st.plotly_chart(fig_map, use_container_width=True)
 
 
