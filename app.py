@@ -87,35 +87,30 @@ if uploaded_csv and uploaded_tif:
 
         st.subheader("Análisis de Datos de Campo")
         with st.container(border=True):
-            # 1. Función de color
+            # 1. Función de color basada en tu columna 'K'
             def color_por_k(k_val):
-                if pd.isna(k_val): return [200, 200, 200, 160]
-                intensidad = min(255, int(abs(k_val) * 25))
-                return [intensidad, 100, 255 - intensidad, 160]
+                try:
+                    # Si K es muy pequeño o negativo (log), usamos abs para la intensidad
+                    v = float(k_val)
+                    intensidad = min(255, int(abs(v) * 25))
+                    return [intensidad, 100, 255 - intensidad, 160]
+                except:
+                    return [200, 200, 200, 160] # Gris si hay error
 
-            # 2. Detección de columnas
-            pk = ['log10_K', 'K', 'k', 'Conductividad']
-            col_k_real = next((n for n in pk if n in df_raw.columns), None)
-            
-            pn = ['Nombre', 'ID', 'Pozo', 'Well', 'Punto']
-            col_id = next((n for n in pn if n in df_raw.columns), None)
-
-            if col_k_real:
-                # Crear datos para el mapa
+            # 2. Verificamos que las columnas existan
+            if 'K' in df_raw.columns and 'Latitud' in df_raw.columns:
                 df_mapa = df_raw.copy()
-                df_mapa['color'] = df_mapa[col_k_real].apply(color_por_k)
+                df_mapa['color'] = df_mapa['K'].apply(color_por_k)
                 
-                # Definir Tooltip de forma segura
-                t_html = f"<b>K:</b> {{{col_k_real}}}"
-                if col_id:
-                    t_html = f"<b>ID:</b> {{{col_id}}}<br/>" + t_html
+                # Tooltip usando 'Tipo_Roca' y 'K'
+                t_html = "<b>Roca:</b> {Tipo_Roca}<br><b>K:</b> {K}"
 
                 # 3. Renderizar Mapa
                 st.pydeck_chart(pdk.Deck(
                     map_style='mapbox://styles/mapbox/outdoors-v12',
                     initial_view_state=pdk.ViewState(
-                        latitude=df_mapa["Latitud"].mean() if "Latitud" in df_mapa.columns else 0,
-                        longitude=df_mapa["Longitud"].mean() if "Longitud" in df_mapa.columns else 0,
+                        latitude=df_mapa["Latitud"].mean(),
+                        longitude=df_mapa["Longitud"].mean(),
                         zoom=12, 
                         pitch=45
                     ),
@@ -129,8 +124,7 @@ if uploaded_csv and uploaded_tif:
                             pickable=True
                         )
                     ],
-                    #tooltip={"html": t_html}
-                    tooltip={"html": f"<b>ID:</b> {{{col_nombre}}}<br/><b>K:</b> {{K}}"}
+                    tooltip={"html": t_html}
                 ))
             else:
                 st.error("No se encontró la columna de conductividad (K) en el CSV.")
