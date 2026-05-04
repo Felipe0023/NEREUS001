@@ -12,12 +12,7 @@ from io import BytesIO
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.cluster import DBSCAN
 from xgboost import XGBRegressor, XGBClassifier
-
-
-import streamlit as st
 import requests
-from io import BytesIO
-from PIL import Image
 
 
 #***************************************************************************
@@ -142,6 +137,8 @@ if uploaded_csv and uploaded_tif:
         # Aquí llamarías a shap.summary_plot
         # Para Streamlit usa: st.pyplot(plt.gcf()) después de generar el plot de SHAP
 
+
 else:
     st.warning("👈 Por favor, sube los archivos CSV y TIF en la barra lateral para comenzar.")
-    st.image("https://drive.google.com/uc?export=view&id=1jcdYjLgdkbgomF81QpfbGQYDwePbgIkj", caption="Mi imagen PNG transparente")
+    #st.image("https://drive.google.com/uc?export=view&id=1jcdYjLgdkbgomF81QpfbGQYDwePbgIkj", caption="Mi imagen PNG transparente")
+    st.image(logo, width=300)
