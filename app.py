@@ -74,7 +74,6 @@ num_capas_z = st.sidebar.slider("Número de capas verticales", 1, 100, 41)
 step_visual = st.sidebar.slider("Resolución visual Render", 1, 10, 5)
 
 # Ahora, en lugar de st.sidebar.header, usamos esto para que aplique el estilo:
-st.sidebar.markdown('<p class="sidebar-header-custom">1. Carga de Datos</p>', unsafe_allow_html=True)
 
 
 # --- CUERPO PRINCIPAL ---
