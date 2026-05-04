@@ -124,8 +124,7 @@ if uploaded_csv and uploaded_tif:
                 ))
 
         #****************************************************************************************
-        st.subheader("Análisis de Datos de Campo2")
-        st.write("") # Pequeño espacio
+        st.subheader("")
         with st.container(border=True):
             st.subheader("Detalle de Registros")
             st.dataframe(df_raw, use_container_width=True)
