@@ -90,7 +90,7 @@ if uploaded_csv and uploaded_tif:
                 return [intensidad, 100, 255 - intensidad, 160]
                 
             col_k = 'log10_K' if 'log10_K' in df_raw.columns else 'K'
-            df['color'] = df_raw['k'].apply(color_por_k)
+            df['color'] = df_raw['K'].apply(color_por_k)
 
             st.pydeck_chart(pdk.Deck(
                 map_style='mapbox://styles/mapbox/outdoors-v12',
