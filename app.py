@@ -129,7 +129,8 @@ if uploaded_csv and uploaded_tif:
                             pickable=True
                         )
                     ],
-                    tooltip={"html": t_html}
+                    #tooltip={"html": t_html}
+                    tooltip={"html": f"<b>ID:</b> {{{col_nombre}}}<br/><b>K:</b> {{k}}"}
                 ))
             else:
                 st.error("No se encontró la columna de conductividad (K) en el CSV.")
