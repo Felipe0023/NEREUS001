@@ -29,9 +29,9 @@ with col2:
 
 
 
-
+#***************************************************************************
 # Configuración de página
-st.set_page_config(page_title="Geología & Hidrogeología AI", layout="wide")
+st.set_page_config(page_title="NEREUS V.1", layout="wide")
 
 # --- FUNCIONES DE APOYO ---
 def load_data(file):
@@ -48,6 +48,7 @@ paso_xy = st.sidebar.number_input("Paso XY (Lat/Lon)", value=0.005, format="%.3f
 paso_z = st.sidebar.number_input("Paso Z (Profundidad m)", value=20)
 num_capas_z = st.sidebar.slider("Número de capas verticales", 1, 100, 41)
 step_visual = st.sidebar.slider("Resolución visual Render", 1, 10, 5)
+#***************************************************************************
 
 # --- CUERPO PRINCIPAL ---
 st.title("🛰️ Sistema de Predicción de Conductividad Hidráulica")
@@ -57,7 +58,7 @@ if uploaded_csv and uploaded_tif:
     df_raw = load_data(uploaded_csv)
 
     tabs = st.tabs(["Análisis Exploratorio", "Entrenamiento", "Predicción 3D", "XAI (SHAP)"])
-
+    #****************************************************************************************
     # --- TAB 1: EDA ---
     with tabs[0]:
 
@@ -132,8 +133,9 @@ if uploaded_csv and uploaded_tif:
 
 
     
-
+    #****************************************************************************************
     # --- TAB 2: ENTRENAMIENTO ---
+
     with tabs[1]:
         st.subheader("Entrenamiento del Modelo XGBoost")
         if st.button("Ejecutar Entrenamiento"):
@@ -167,6 +169,7 @@ if uploaded_csv and uploaded_tif:
             # Agregar superficie y puntos...
             st.plotly_chart(fig_3d, use_container_width=True)
 
+    #****************************************************************************************
     # --- TAB 4: EXPLICABILIDAD ---
     with tabs[3]:
 
