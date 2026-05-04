@@ -60,43 +60,46 @@ if uploaded_csv and uploaded_tif:
     tabs = st.tabs(["Análisis Exploratorio", "Entrenamiento", "Predicción 3D", "XAI (SHAP)"])
 
     # --- TAB 1: EDA ---
-    with tabs[0]:
+with tabs[0]:
+    st.subheader("Mapa de Localización")
+    
+    # Guardar temporalmente el TIF para rasterio
+    with open("temp_dem.tif", "wb") as f:
+        f.write(uploaded_tif.getbuffer())
 
-        st.subheader("Mapa de Localización")
-        # Guardar temporalmente el TIF para rasterio
-        with open("temp_dem.tif", "wb") as f:
-            f.write(uploaded_tif.getbuffer())
+    with rasterio.open("temp_dem.tif") as src:
+        data_dem = src.read(1).astype(float)
+        data_dem[data_dem == src.nodata] = np.nan
+        bounds = src.bounds
+        x_coords = np.linspace(bounds.left, bounds.right, data_dem.shape[1])
+        y_coords = np.linspace(bounds.bottom, bounds.top, data_dem.shape[0])
 
-        with rasterio.open("temp_dem.tif") as src:
-            data_dem = src.read(1).astype(float)
-            data_dem[data_dem == src.nodata] = np.nan
-            bounds = src.bounds
-            x_coords = np.linspace(bounds.left, bounds.right, data_dem.shape[1])
-            y_coords = np.linspace(bounds.bottom, bounds.top, data_dem.shape[0])
+    # Mapa Plotly (Primer Gráfico)
+    fig_map = go.Figure()
+    fig_map.add_trace(go.Heatmap(
+        x=x_coords, 
+        y=y_coords, 
+        z=np.flipud(data_dem), 
+        colorscale='earth'
+    ))
+    fig_map.add_trace(go.Scatter(
+        x=df_raw['Longitud'], 
+        y=df_raw['Latitud'], 
+        mode='markers', 
+        marker=dict(color='red')
+    ))
+    fig_map.update_layout(width=800, height=600, title="Ubicación de Perforaciones")
+    st.plotly_chart(fig_map, use_container_width=True)
 
-        # Mapa Plotly
-        fig_map = go.Figure()
-        fig_map.add_trace(go.Heatmap(x=x_coords, y=y_coords, z=np.flipud(data_dem), colorscale='earth'))
-        fig_map.add_trace(go.Scatter(x=df_raw['Longitud'], y=df_raw['Latitud'], mode='markers', marker=dict(color='red')))
-        fig_map.update_layout(width=800, height=600, title="Ubicación de Perforaciones")
-        st.plotly_chart(fig_map, use_container_width=True)
+    # Sección de Datos de Campo (Solo el CSV)
+    st.divider() # Una línea visual para separar el mapa de la tabla
+    st.subheader("Análisis de Datos de Campo")
+    
+    st.write("Vista previa de datos cargados:")
+    st.dataframe(df_raw, use_container_width=True) 
+    # Al quitar col2, el dataframe ahora se extiende para que sea más fácil leer las columnas
 
-
-        st.subheader("Análisis de Datos de Campo")
-        #col1, col2 = st.columns(2)
-
-        with 1:
-            st.write("Vista previa de datos:")
-            st.dataframe(df_raw.head())
-
-        with col2:
-            # Comparación Litológica (Tu código original de Boxplot)
-            st.write("Distribución de Conductividad por Roca")
-            fig_box, ax_box = plt.subplots(figsize=(10, 6))
-            sns.boxplot(data=df_raw, x='K', y='Tipo_Roca', palette="viridis", ax=ax_box)
-            ax_box.set_xscale('log')
-            st.pyplot(fig_box)
-
+    
     # --- TAB 2: ENTRENAMIENTO ---
     with tabs[1]:
         st.subheader("Entrenamiento del Modelo XGBoost")
