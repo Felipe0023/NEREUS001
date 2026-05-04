@@ -62,6 +62,7 @@ if uploaded_csv and uploaded_tif:
     with tabs[0]:
 
         st.subheader("Mapa de Localización")
+        with st.container(border=True):
         # Guardar temporalmente el TIF para rasterio
         with open("temp_dem.tif", "wb") as f:
             f.write(uploaded_tif.getbuffer())
@@ -85,7 +86,6 @@ if uploaded_csv and uploaded_tif:
 
 
         st.subheader("Análisis de Datos de Campo")
-
         with st.container(border=True):
             # 1. Función de color
             def color_por_k(k_val):
