@@ -128,8 +128,8 @@ if uploaded_csv and uploaded_tif:
         st.write("") # Pequeño espacio
 
             
-         else:
-                st.error("No se encontró la columna de conductividad (K) en el CSV.")
+         #else:
+         #       st.error("No se encontró la columna de conductividad (K) en el CSV.")
 
 
 
