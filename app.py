@@ -124,9 +124,11 @@ if uploaded_csv and uploaded_tif:
                 ))
 
         #****************************************************************************************
-        st.subheader("Análisis de Datos de Campo")
+        st.subheader("Análisis de Datos de Campo2")
         st.write("") # Pequeño espacio
-
+        with st.container(border=True):
+            st.subheader("Detalle de Registros")
+            st.dataframe(df, use_container_width=True)
             
          #else:
          #       st.error("No se encontró la columna de conductividad (K) en el CSV.")
