@@ -124,8 +124,8 @@ if uploaded_csv and uploaded_tif:
                 ))
 
         #****************************************************************************************
-
-
+        st.subheader("Análisis de Datos de Campo")
+        st.write("") # Pequeño espacio
 
             
             else:
