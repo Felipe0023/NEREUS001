@@ -102,7 +102,8 @@ if uploaded_csv and uploaded_tif:
                 ),
                 layers=[pdk.Layer("ScatterplotLayer", df_raw, get_position=["Longitud", "Latitud"],
                               get_fill_color="color", get_radius=80, pickable=True)],
-                tooltip={"html": f"<b>ID:</b> {{{col_nombre}}}<br/><b>K:</b> {{k}}"}
+                #tooltip={"html": f"<b>ID:</b> {{{col_nombre}}}<br/><b>K:</b> {{k}}"}
+                tooltip={"html": tooltip_html}
             ))
 
 
