@@ -60,7 +60,7 @@ if uploaded_csv and uploaded_tif:
     #****************************************************************************************
     # --- TAB 1: EDA ---
     with tabs[0]:
-
+        #************************************************************************************
         st.subheader("Mapa de Localización")
         # Guardar temporalmente el TIF para rasterio
         with open("temp_dem.tif", "wb") as f:
@@ -80,6 +80,7 @@ if uploaded_csv and uploaded_tif:
         fig_map.update_layout(width=800, height=600, title="Ubicación de Perforaciones")
         st.plotly_chart(fig_map, use_container_width=True)
 
+        #****************************************************************************************
         st.subheader("Análisis de Datos de Campo")
         with st.container(border=True):
             # 1. Función de color basada en tu columna 'K'
@@ -122,6 +123,8 @@ if uploaded_csv and uploaded_tif:
                     tooltip={"html": t_html}
                 ))
 
+        #****************************************************************************************
+        st.subheader("Análisis de Datos de Campo")
         st.write("") # Pequeño espacio
         with st.container(border=True):
             st.subheader("Detalle de Registros")
