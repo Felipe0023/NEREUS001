@@ -141,4 +141,4 @@ if uploaded_csv and uploaded_tif:
 else:
     st.warning("👈 Por favor, sube los archivos CSV y TIF en la barra lateral para comenzar.")
     #st.image("https://drive.google.com/uc?export=view&id=1jcdYjLgdkbgomF81QpfbGQYDwePbgIkj", caption="Mi imagen PNG transparente")
-    st.image(logo, width=300)
+
