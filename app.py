@@ -132,7 +132,7 @@ if uploaded_csv and uploaded_tif:
 
 
             
-            else:
+        else:
                 st.error("No se encontró la columna de conductividad (K) en el CSV.")
 
 
