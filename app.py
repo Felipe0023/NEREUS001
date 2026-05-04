@@ -76,19 +76,7 @@ if uploaded_csv and uploaded_tif:
 
 
         st.subheader("Análisis de Datos de Campo")
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.write("Vista previa de datos:")
-            st.dataframe(df_raw.head())
-
-        with col2:
-            # Comparación Litológica (Tu código original de Boxplot)
-            st.write("Distribución de Conductividad por Roca")
-            fig_box, ax_box = plt.subplots(figsize=(10, 6))
-            sns.boxplot(data=df_raw, x='K', y='Tipo_Roca', palette="viridis", ax=ax_box)
-            ax_box.set_xscale('log')
-            st.pyplot(fig_box)
+ 
 
     # --- TAB 2: ENTRENAMIENTO ---
     with tabs[1]:
