@@ -83,7 +83,7 @@ if uploaded_csv and uploaded_tif:
 
 
         st.subheader("Análisis de Datos de Campo")
-        col1, col2 = st.columns(2)
+        #col1, col2 = st.columns(2)
 
         with col1:
             st.write("Vista previa de datos:")
