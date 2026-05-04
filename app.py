@@ -31,7 +31,6 @@ with col2:
 
 #***************************************************************************
 # Configuración de página
-#st.set_page_config(page_title="NEREUS V.1", layout="wide")
 
 # --- FUNCIONES DE APOYO ---
 def load_data(file):
@@ -63,7 +62,6 @@ if uploaded_csv and uploaded_tif:
     with tabs[0]:
 
         st.subheader("Mapa de Localización")
-
         # Guardar temporalmente el TIF para rasterio
         with open("temp_dem.tif", "wb") as f:
             f.write(uploaded_tif.getbuffer())
@@ -81,10 +79,6 @@ if uploaded_csv and uploaded_tif:
         fig_map.add_trace(go.Scatter(x=df_raw['Longitud'], y=df_raw['Latitud'], mode='markers', marker=dict(color='red')))
         fig_map.update_layout(width=800, height=600, title="Ubicación de Perforaciones")
         st.plotly_chart(fig_map, use_container_width=True)
-
-
-
-
 
         st.subheader("Análisis de Datos de Campo")
         with st.container(border=True):
@@ -127,6 +121,14 @@ if uploaded_csv and uploaded_tif:
                     ],
                     tooltip={"html": t_html}
                 ))
+
+        st.write("") # Pequeño espacio
+        with st.container(border=True):
+            st.subheader("Detalle de Registros")
+            st.dataframe(df, use_container_width=True)
+
+
+            
             else:
                 st.error("No se encontró la columna de conductividad (K) en el CSV.")
 
