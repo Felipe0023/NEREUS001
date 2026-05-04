@@ -18,7 +18,7 @@ import requests
 
 #***************************************************************************
 logo = Image.open("LOGO_NEREUS.png")
-st.set_page_config(page_title="NEREUS App", page_icon=logo)
+st.set_page_config(page_title="NEREUS V.1", page_icon=logo)
 # 2. Crear tres columnas
 # La proporción [1, 1, 1] crea tres espacios iguales. 
 # Pondremos el logo en la columna del medio.
@@ -31,7 +31,7 @@ with col2:
 
 #***************************************************************************
 # Configuración de página
-st.set_page_config(page_title="NEREUS V.1", layout="wide")
+#st.set_page_config(page_title="NEREUS V.1", layout="wide")
 
 # --- FUNCIONES DE APOYO ---
 def load_data(file):
