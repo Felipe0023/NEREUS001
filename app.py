@@ -44,7 +44,7 @@ num_capas_z = st.sidebar.slider("Número de capas verticales", 1, 100, 41)
 step_visual = st.sidebar.slider("Resolución visual Render", 1, 10, 5)
 
 # --- CUERPO PRINCIPAL ---
-st.title("🛰️ Sistema de Predicción de Conductividad Hidráulica")
+st.title("Sistema Inteligente de Gestión de Acuíferos")
 
 if uploaded_csv and uploaded_tif:
     # Procesamiento inicial
