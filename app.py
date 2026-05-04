@@ -29,33 +29,42 @@ with col2:
 
 # --- FUNCIONES DE APOYO ---
 
-# Inyectar CSS personalizado para el fondo del header en la sidebar
+# Inyectar CSS para poner la sidebar negra con letras blancas
 st.markdown(
     """
     <style>
-    /* Selecciona el contenedor del header dentro de la sidebar */
-    [data-testid="stSidebar"] .st-emotion-cache-10trblm {
-        background-color: #f0f2f6; /* Cambia este color (ej. #2E7D32 para verde) */
-        padding: 10px;
-        border-radius: 5px;
+    /* 1. Fondo de la barra lateral */
+    [data-testid="stSidebar"] {
+        background-color: #000000;
     }
-    
-    /* Alternativa más segura: cambiar el fondo de todo el bloque de texto */
-    .sidebar-header-custom {
-        background-color: #ff4b4b; /* Color de fondo (Rojo Streamlit) */
-        color: white;              /* Color del texto */
-        padding: 15px;
-        border-radius: 10px;
-        text-align: center;
-        font-weight: bold;
+
+    /* 2. Color de todos los textos, headers y etiquetas en la sidebar */
+    [data-testid="stSidebar"] .stText, 
+    [data-testid="stSidebar"] label, 
+    [data-testid="stSidebar"] h1, 
+    [data-testid="stSidebar"] h2, 
+    [data-testid="stSidebar"] h3, 
+    [data-testid="stSidebar"] p {
+        color: white !important;
+    }
+
+    /* 3. Color de los números de los sliders y textos pequeños */
+    [data-testid="stSidebar"] .stMarkdown {
+        color: white;
+    }
+
+    /* 4. Ajuste opcional: color de los widgets (opcional) */
+    [data-testid="stSidebar"] .stNumberInput div div input {
+        color: black; /* El texto dentro del cuadro de número mejor dejarlo oscuro */
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Ahora, en lugar de st.sidebar.header, usamos esto para que aplique el estilo:
-#st.sidebar.markdown('<p class="sidebar-header-custom">1. Carga de Datos</p>', unsafe_allow_html=True)
+# --- AQUI CONTINUA TU CODIGO DE LA SIDEBAR ---
+st.sidebar.header("1. Carga de Datos")
+# ... resto de tus botones de upload y sliders
 
 
 def load_data(file):
