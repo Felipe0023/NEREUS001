@@ -92,10 +92,9 @@ if uploaded_csv and uploaded_tif:
             with c3:
                 st.metric("Profundidad Promedio", f"{df_raw['Profundidad'].mean():.1f} m")
 
-
-        
+        #****************************************************************************************       
         with st.container(border=True):
-            st.subheader("Análisis de Datos de Campo")
+            #st.subheader("Análisis de Datos de Campo")
             # 1. Función de color basada en tu columna 'K'
             def color_por_k(k_val):
                 try:
