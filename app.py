@@ -88,7 +88,7 @@ if uploaded_csv and uploaded_tif:
             with c1:
                 st.metric("Total Perforaciones", len(df_raw))
             with c2:
-                st.metric("Promedio Valor K", f"{df['K'].mean():.2f}")
+                st.metric("Promedio Valor K", f"{df_raw['K'].mean():.2f}")
             with c3:
                 st.metric("Profundidad Promedio", f"{df_raw['Profundidad'].mean():.1f} m")
 
