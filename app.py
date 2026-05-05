@@ -61,13 +61,11 @@ if uploaded_csv and uploaded_tif:
     # --- TAB 1: EDA ---
     with tabs[0]:
         #************************************************************************************
-
         with st.container(border=True):
             st.header("Mapa de Localización")
             # Guardar temporalmente el TIF para rasterio
             with open("temp_dem.tif", "wb") as f:
                 f.write(uploaded_tif.getbuffer())
-
             with rasterio.open("temp_dem.tif") as src:
                 data_dem = src.read(1).astype(float)
                 data_dem[data_dem == src.nodata] = np.nan
