@@ -16,6 +16,8 @@ import requests
 import pydeck as pdk
 import requests
 
+mapbox_key = st.secrets.get("MAPBOX_TOKEN", "")
+
 #***************************************************************************
 logo = Image.open("LOGO_NEREUS.png")
 st.set_page_config(page_title="NEREUS V.1", page_icon=logo)
@@ -137,6 +139,7 @@ if uploaded_csv and uploaded_tif:
                 # 3. Renderizar Mapa
                 st.pydeck_chart(pdk.Deck(
                     map_style='mapbox://styles/mapbox/outdoors-v12',
+                    api_keys={'mapbox': mapbox_key},
                     initial_view_state=pdk.ViewState(
                         latitude=df_mapa["Latitud"].mean(),
                         longitude=df_mapa["Longitud"].mean(),
