@@ -63,23 +63,24 @@ if uploaded_csv and uploaded_tif:
         #************************************************************************************
         st.header("Mapa de Localización")
         # Guardar temporalmente el TIF para rasterio
-        with open("temp_dem.tif", "wb") as f:
-            f.write(uploaded_tif.getbuffer())
+        with st.container(border=True):
+            with open("temp_dem.tif", "wb") as f:
+                f.write(uploaded_tif.getbuffer())
 
-        with rasterio.open("temp_dem.tif") as src:
-            data_dem = src.read(1).astype(float)
-            data_dem[data_dem == src.nodata] = np.nan
-            bounds = src.bounds
-            x_coords = np.linspace(bounds.left, bounds.right, data_dem.shape[1])
-            y_coords = np.linspace(bounds.bottom, bounds.top, data_dem.shape[0])
+            with rasterio.open("temp_dem.tif") as src:
+                data_dem = src.read(1).astype(float)
+                data_dem[data_dem == src.nodata] = np.nan
+                bounds = src.bounds
+                x_coords = np.linspace(bounds.left, bounds.right, data_dem.shape[1])
+                y_coords = np.linspace(bounds.bottom, bounds.top, data_dem.shape[0])
 
-        # Mapa Plotly
-        fig_map = go.Figure()
-        fig_map.add_trace(go.Heatmap(x=x_coords, y=y_coords, z=np.flipud(data_dem), colorscale='earth'))
-        fig_map.add_trace(go.Scatter(x=df_raw['Longitud'], y=df_raw['Latitud'], mode='markers', marker=dict(color='red')))
-        #fig_map.update_layout(width=800, height=600, title="Ubicación de Perforaciones")
-        fig_map.update_layout(width=800, height=600)
-        st.plotly_chart(fig_map, use_container_width=True)
+            # Mapa Plotly
+            fig_map = go.Figure()
+            fig_map.add_trace(go.Heatmap(x=x_coords, y=y_coords, z=np.flipud(data_dem), colorscale='earth'))
+            fig_map.add_trace(go.Scatter(x=df_raw['Longitud'], y=df_raw['Latitud'], mode='markers', marker=dict(color='red')))
+            #fig_map.update_layout(width=800, height=600, title="Ubicación de Perforaciones")
+            fig_map.update_layout(width=800, height=600)
+            st.plotly_chart(fig_map, use_container_width=True)
 
         #****************************************************************************************
         with st.container(border=True):
