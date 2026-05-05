@@ -112,7 +112,24 @@ if uploaded_csv and uploaded_tif:
                 df_mapa['color'] = df_mapa['K'].apply(color_por_k)
                 
                 # Tooltip usando 'Tipo_Roca' y 'K'
-                t_html = "<b>Roca:</b> {Tipo_Roca}<br><b>K:</b> {K}"
+                #t_html = "<b>Roca:</b> {Tipo_Roca}<br><b>K:</b> {K}"
+
+
+                # Tooltip con recuadro (estilo tipo "card")
+                t_html = """
+                <div style="
+                    background-color: #ffffff; 
+                    color: #333333; 
+                    padding: 10px; 
+                    border-radius: 8px; 
+                    border: 1px solid #cccccc;
+                    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+                    font-family: sans-serif;
+                ">
+                    <b style="color: #2E7D32;">🪨 Roca:</b> {Tipo_Roca}<br>
+                    <b style="color: #1565C0;">💧 Conductividad (K):</b> {K}
+                </div>
+                """
 
                 # 3. Renderizar Mapa
                 st.pydeck_chart(pdk.Deck(
