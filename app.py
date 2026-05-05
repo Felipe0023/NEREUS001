@@ -63,10 +63,7 @@ if uploaded_csv and uploaded_tif:
         #************************************************************************************
         st.header("Mapa de Localización")
         # Guardar temporalmente el TIF para rasterio
-        #with open("temp_dem.tif", "wb") as f:
-        with st.container(border=True):
-            open("temp_dem.tif", "wb")
-            st.header("Mapa de Localización")
+        with open("temp_dem.tif", "wb") as f:
             f.write(uploaded_tif.getbuffer())
 
         with rasterio.open("temp_dem.tif") as src:
