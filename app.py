@@ -81,11 +81,19 @@ if uploaded_csv and uploaded_tif:
         st.plotly_chart(fig_map, use_container_width=True)
 
         #****************************************************************************************
-        #st.subheader("")
-        #with st.container(border=True):
+       
+        st.header("Monitoreo de Perforaciones")
+        # Fila de Métricas
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            st.metric("Total Perforaciones", len(df))
+        with c2:
+            st.metric("Promedio Valor K", f"{df['k'].mean():.2f}")
+        with c3:
+            st.metric("Profundidad Promedio", f"{df['profundidad'].mean():.1f} m")
+
 
         
-        #st.subheader("Análisis de Datos de Campo")
         with st.container(border=True):
             st.subheader("Análisis de Datos de Campo")
             # 1. Función de color basada en tu columna 'K'
