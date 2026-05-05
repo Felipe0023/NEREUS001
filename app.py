@@ -128,7 +128,7 @@ if uploaded_csv and uploaded_tif:
                 ">
                     <b style="color: #2E7D32;">🪨 Longitud:</b> {Longitud}<br>
                     <b style="color: #2E7D32;">🪨 Latitud:</b> {Latitud}<br>
-                    <b style="color: #2E7D32;">🪨 Profundidad:</b> {Profundidad<br>
+                    <b style="color: #2E7D32;">🪨 Profundidad:</b> {Profundidad}<br>
                     <b style="color: #2E7D32;">🪨 Roca:</b> {Tipo_Roca}<br>
                     <b style="color: #1565C0;">💧 Conductividad (K):</b> {K}
                 </div>
