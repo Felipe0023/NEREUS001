@@ -86,11 +86,11 @@ if uploaded_csv and uploaded_tif:
             # Fila de Métricas
             c1, c2, c3 = st.columns(3)
             with c1:
-                st.metric("Total Perforaciones", len(df))
+                st.metric("Total Perforaciones", len(df_raw))
             with c2:
-                st.metric("Promedio Valor K", f"{df['k'].mean():.2f}")
+                st.metric("Promedio Valor K", f"{df['K'].mean():.2f}")
             with c3:
-                st.metric("Profundidad Promedio", f"{df['profundidad'].mean():.1f} m")
+                st.metric("Profundidad Promedio", f"{df_raw['Profundidad'].mean():.1f} m")
 
 
         
