@@ -126,6 +126,8 @@ if uploaded_csv and uploaded_tif:
                     box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
                     font-family: sans-serif;
                 ">
+                    <b style="color: #2E7D32;">🪨 Longitud:</b> {Longitud}<br>
+                    <b style="color: #2E7D32;">🪨 Latitud:</b> {Latitud}<br>
                     <b style="color: #2E7D32;">🪨 Roca:</b> {Tipo_Roca}<br>
                     <b style="color: #1565C0;">💧 Conductividad (K):</b> {K}
                 </div>
